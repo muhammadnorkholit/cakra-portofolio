@@ -9,7 +9,7 @@ export default function notFound() {
         404
       </h1>
       <p>Oops, something went wrong.</p>
-      <p className="mb-2">Sorry , we couldn't find your page</p>
+      <p className="mb-2">{`Sorry , we couldn't find your page`}</p>
       <Link href={"/projects"}>
         <Button>Go Back Home</Button>
       </Link>

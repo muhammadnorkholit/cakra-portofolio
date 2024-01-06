@@ -52,7 +52,7 @@ export default async function Dashboard({ searchParams }: any) {
             />
             <h3 className="text-slate-600"> No projects created</h3>{" "}
             <p className="text-slate-600">
-              let's start adding the first project{" "}
+              lets start adding the first project
             </p>
             <Link href={"/projects/new-project"}>
               <Button variant={"outline"} className="mt-3">

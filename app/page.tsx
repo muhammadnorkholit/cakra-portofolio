@@ -19,7 +19,7 @@ const fetchData = async () => {
   return { projects, setting };
 };
 
-export default async function Home({ req }: { req: any }) {
+export default async function Home() {
   let { projects, setting } = await fetchData();
   let year = new Date().getFullYear();
 
