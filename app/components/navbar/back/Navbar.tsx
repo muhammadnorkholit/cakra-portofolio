@@ -34,6 +34,11 @@ export default function Navbar({ name }: { name: string }) {
           </Button>
           <ul className="flex flex-col gap-4">
             <li>
+              <Link className="border-l-4 text-sm  block py-2 px-5" href={"/"}>
+                <i className="mr-3 fa fa-home"></i>Landing Page
+              </Link>
+            </li>
+            <li>
               <Link
                 className="border-l-4 bg-slate-100 block py-2 border-black px-5"
                 href={"/projects"}

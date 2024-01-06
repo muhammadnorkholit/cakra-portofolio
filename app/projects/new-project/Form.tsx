@@ -37,7 +37,8 @@ export default function Form() {
       const img = ImageFile;
       const formData = new FormData();
       formData.append("file", img);
-      let imageName = await fetch(`${process.env.API_LOCAL}/upload`, {
+
+      let imageName = await fetch(`/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -56,14 +57,16 @@ export default function Form() {
         toast({
           className: "bg-emerald-500 text-white  ",
           title: "Notification ",
-          description: "Successfully update  project",
+          description: "Successfully create  project ",
         });
       }, 4000);
     } catch (error) {
+      console.log(error);
+
       toast({
         className: "bg-rose-500 text-white  ",
         title: "Notification ",
-        description: "Failed update  project",
+        description: "Failed create  project " + error,
       });
     }
   };
