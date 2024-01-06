@@ -17,7 +17,12 @@ const fetchData = async (id: number) => {
     if (status === 404) notFound();
   }
 };
-
+export async function generateStaticParams() {
+  let data = await axios("/projects");
+  return data.data.map((d: any) => ({
+    id: d.id + "",
+  }));
+}
 export default async function EditProject({ params }: any) {
   let { id } = params;
   let project = await fetchData(id);
