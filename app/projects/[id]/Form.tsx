@@ -9,14 +9,13 @@ import Loader from "../../components/Loader";
 import { axios } from "@/helpers/Axios";
 import Image from "next/image";
 import Link from "next/link";
+import { UploadButton, UploadDropzone } from "@/app/utils/uploadthing";
 require("moment/locale/id");
 
 export default function Form({ data }: { data: any }) {
-  const [Preview, setPreview] = useState(data.img);
-  const [CurrImg] = useState(data.img);
   const [Loading, setLoading] = useState(false);
   const [BtnText, setBtnText] = useState("Update Project");
-  const [ImageFile, setImageFile] = useState();
+  const [ImageFile, setImageFile] = useState(data.img);
   const [Project] = useState(data);
   const { toast } = useToast();
   const { id } = useParams();
@@ -33,24 +32,10 @@ export default function Form({ data }: { data: any }) {
       const desc = target?.desc.value;
       const img = ImageFile;
 
-      let fileName;
-      if (img) {
-        const formData = new FormData();
-        formData.append("file", img);
-        formData.append("imgName", CurrImg);
-        let imageName = await fetch(`/api/upload`, {
-          method: "POST",
-          body: formData,
-        });
-        fileName = await imageName.json();
-      } else {
-        fileName = CurrImg;
-      }
-
       await axios.put("/projects/" + id, {
         title,
         desc,
-        img: fileName,
+        img: img,
         date: data.date,
       });
       setTimeout(() => {
@@ -93,44 +78,37 @@ export default function Form({ data }: { data: any }) {
               Image
             </label>
 
-            <label className="block  ">
-              <div
-                className={`bg-slate-100 relative ${
-                  !Preview && " border-dashed border-4"
-                } border-slate-400 w-full  h-80 rounded-sm overflow-hidden flex flex-col items-center justify-center`}
-              >
-                <i className="text-9xl text-slate-400 fa-solid fa-cloud-arrow-down"></i>{" "}
-                <h3>
-                  <strong>Choose a file</strong> or drag it here
-                </h3>
-                {Preview && (
-                  <Image
-                    loading="lazy"
-                    objectFit="cover"
-                    src={Preview}
-                    alt="preview image"
-                    fill
-                  />
-                )}
-              </div>
-              <Input
-                name="image"
-                type="file"
-                accept="images/*"
-                onChange={(e: any) => {
-                  if (e.target.files[0]) {
-                    const data = e.target.files[0];
-                    const reader: any = new FileReader();
-                    reader.onload = () => {
-                      setPreview(reader.result);
-                    };
-                    setImageFile(data);
-                    reader.readAsDataURL(data);
-                  }
+            <div className="block relative rounded-sm overflow-hidden ">
+              <UploadDropzone
+                className="w-full  h-80"
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  setImageFile(res[0].url);
                 }}
-                className="hidden"
+                onUploadError={(error: Error) => {
+                  alert(`ERROR! ${error.message}`);
+                }}
               />
-            </label>
+              {ImageFile && (
+                <Image
+                  objectFit="cover"
+                  src={ImageFile}
+                  className="rounded-sm"
+                  alt="preview image"
+                  fill
+                />
+              )}
+            </div>
+            <UploadButton
+              className=" mt-2"
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                setImageFile(res[0].url);
+              }}
+              onUploadError={(error: Error) => {
+                alert(`ERROR! ${error.message}`);
+              }}
+            />
           </div>
           <div className="col-span-3">
             <div className="form-group mb-2">

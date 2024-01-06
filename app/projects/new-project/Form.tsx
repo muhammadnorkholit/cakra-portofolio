@@ -9,11 +9,11 @@ import Loader from "../../components/Loader";
 import { axios } from "@/helpers/Axios";
 import Image from "next/image";
 import Link from "next/link";
+import { UploadButton, UploadDropzone } from "@/app/utils/uploadthing";
 const moment = require("moment");
 require("moment/locale/id");
 
 export default function Form() {
-  const [Preview, setPreview] = useState("");
   const [Loading, setLoading] = useState(false);
   const [BtnText, setBtnText] = useState("Save Project");
   const [ImageFile, setImageFile] = useState("");
@@ -35,19 +35,10 @@ export default function Form() {
       const title = target?.title.value;
       const desc = target?.desc.value;
       const img = ImageFile;
-      const formData = new FormData();
-      formData.append("file", img);
-
-      let imageName = await fetch(`/api/upload`, {
-        method: "POST",
-        body: formData,
-      });
-      const fileName = await imageName.json();
-
       await axios.post("/projects/", {
         title,
         desc,
-        img: fileName,
+        img: img,
         date: formattedDate,
       });
       setTimeout(() => {
@@ -79,6 +70,7 @@ export default function Form() {
           Back
         </Button>
       </Link>
+
       <form
         action=""
         method="post"
@@ -91,43 +83,37 @@ export default function Form() {
               Image
             </label>
 
-            <label className="block  ">
-              <div
-                className={`bg-slate-100 relative ${
-                  !Preview && " border-dashed border-4"
-                } border-slate-400 w-full  h-80 rounded-sm overflow-hidden flex flex-col items-center justify-center`}
-              >
-                <i className="text-9xl text-slate-400 fa-solid fa-cloud-arrow-down"></i>{" "}
-                <h3>
-                  <strong>Choose a file</strong> or drag it here
-                </h3>
-                {Preview && (
-                  <Image
-                    objectFit="cover"
-                    src={Preview}
-                    alt="preview image"
-                    fill
-                  />
-                )}
-              </div>
-              <Input
-                name="image"
-                type="file"
-                accept="images/*"
-                onChange={(e: any) => {
-                  if (e.target.files[0]) {
-                    const data = e.target.files[0];
-                    const reader: any = new FileReader();
-                    reader.onload = () => {
-                      setPreview(reader.result);
-                    };
-                    setImageFile(data);
-                    reader.readAsDataURL(data);
-                  }
+            <div className="block relative rounded-sm overflow-hidden ">
+              <UploadDropzone
+                className="w-full  h-80"
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  setImageFile(res[0].url);
                 }}
-                className="hidden"
+                onUploadError={(error: Error) => {
+                  alert(`ERROR! ${error.message}`);
+                }}
               />
-            </label>
+              {ImageFile && (
+                <Image
+                  objectFit="cover"
+                  src={ImageFile}
+                  className="rounded-sm"
+                  alt="preview image"
+                  fill
+                />
+              )}
+            </div>
+            <UploadButton
+              className=" mt-2"
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                setImageFile(res[0].url);
+              }}
+              onUploadError={(error: Error) => {
+                alert(`ERROR! ${error.message}`);
+              }}
+            />
           </div>
           <div className="col-span-3">
             <div className="form-group mb-2">
