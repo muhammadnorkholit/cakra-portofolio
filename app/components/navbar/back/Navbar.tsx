@@ -23,7 +23,7 @@ export default function Navbar({ name }: { name: string }) {
         <aside
           className={`menu ${
             Show ? "left-0 opacity-100" : "left-[-100%] opacity-0"
-          } mobile w-full h-full top-0 transition-all duration-500 bg-white  left-0 py-16 md:hidden fixed block`}
+          } mobile w-full h-full z-50 top-0 transition-all duration-500 bg-white  left-0 py-16 md:hidden fixed block`}
         >
           <Button
             variant={"outline"}
