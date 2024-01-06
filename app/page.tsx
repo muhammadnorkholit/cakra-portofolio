@@ -34,7 +34,6 @@ export default async function Home() {
         <div className="flex gap-2">
           <Button variant={"default"}>Explore Project</Button>
           <a href="https://github.com/muhammadnorkholit">
-            {" "}
             <Button variant={"outline"}>
               <i className="fa-brands fa-github mr-2"></i> github
             </Button>

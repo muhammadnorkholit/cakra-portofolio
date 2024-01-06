@@ -36,7 +36,6 @@ export default function Sidebar({ className }: typeSidebar) {
             } border-l-4 text-sm block py-2 px-5`}
             href={"/setting"}
           >
-            {" "}
             <i className="mr-3 border-l-4 border-transparent fa-solid fa-gear"></i>
             Setting
           </Link>

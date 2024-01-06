@@ -50,7 +50,7 @@ export default async function Dashboard({ searchParams }: any) {
               height={400}
               alt="empty image"
             />
-            <h3 className="text-slate-600"> No projects created</h3>{" "}
+            <h3 className="text-slate-600"> No projects created</h3>
             <p className="text-slate-600">
               lets start adding the first project
             </p>
