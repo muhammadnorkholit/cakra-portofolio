@@ -39,13 +39,18 @@ export default function Form() {
       const formData = new FormData();
       formData.append("email", Email);
       formData.append("password", Password);
-      await fetch("/api/login", {
+      let req = await fetch("/api/login", {
         method: "POST",
         body: formData,
       });
-      route.push("/projects");
+      let res = await req.json();
+      if (req.status == 200) {
+        route.push("/projects");
+        setBtnText("login successfully");
+      } else if (req.status == 400) {
+        setBtnText("login failed");
+      }
       setLoading(false);
-      setBtnText("login successfully");
     } catch (error) {
       console.log(error);
     }
