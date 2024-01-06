@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function notFound() {
   return (
     <div className="flex relative items-center flex-col justify-center min-h-screen">
       <h1 className="text-[50vh]  pointer-events-none  leading-[20rem] font-bold">
-        4<span className="">0</span>4
+        404
       </h1>
-      <p className="">Oops, something went wrong.</p>
+      <p>Oops, something went wrong.</p>
       <p className="mb-2">Sorry , we couldn't find your page</p>
       <Link href={"/projects"}>
         <Button>Go Back Home</Button>

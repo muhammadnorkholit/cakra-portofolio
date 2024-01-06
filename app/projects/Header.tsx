@@ -24,14 +24,14 @@ export default function Header({ count }: { count: number }) {
   };
   return (
     <div className="flex justify-between">
-      <h3>{count} Projects</h3>{" "}
+      <h3>{count} Projects</h3>
       <div className="flex gap-2">
         <Button
           className="hidden md:inline-block"
           onClick={() => handleGrid("horizontal")}
           variant={Grid == "horizontal" ? "secondary" : "ghost"}
         >
-          <i className="fa-solid fa-grip"></i>{" "}
+          <i className="fa-solid fa-grip"></i>
         </Button>
         <Button
           className="hidden md:inline-block"
