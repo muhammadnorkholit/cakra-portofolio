@@ -63,7 +63,7 @@ export default function Form() {
       toast({
         className: "bg-rose-500 text-white  ",
         title: "Notification ",
-        description: "Failed update  project",
+        description: "Failed update  project"+error,
       });
     }
   };
