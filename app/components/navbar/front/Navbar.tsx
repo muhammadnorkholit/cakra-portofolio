@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React, { useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";

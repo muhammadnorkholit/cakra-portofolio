@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { AnchorHTMLAttributes, HTMLAttributeAnchorTarget } from "react";
+import React from "react";
 
 type typeItem = {
   title?: string;

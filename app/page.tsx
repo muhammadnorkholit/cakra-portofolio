@@ -3,8 +3,6 @@ import { Metadata } from "next";
 import CardProject from "./components/card-project/front/CardProject";
 import FrontWrapper from "./components/layout/FrontWrapper";
 import { axios } from "@/helpers/Axios";
-import { NextRequest } from "next/server";
-import Axios from "axios";
 
 export const metadata: Metadata = {
   title: "Cakra Portofolio",
