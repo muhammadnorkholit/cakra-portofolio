@@ -20,7 +20,7 @@ export default function Navbar({ dataAuth }: { dataAuth: string }) {
         <ul className="flex items-center gap-4">
           <NavItem title="Home" link="/" />
           <NavItem title="Project" link="/" />
-          <NavItem link="https://github.com/muhammadnorkholit">
+          <NavItem target="_blank" link="https://github.com/muhammadnorkholit">
             <Button variant={"outline"}>
               <i className="fa-brands fa-github mr-2"></i> github
             </Button>
