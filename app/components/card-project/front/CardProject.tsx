@@ -17,7 +17,7 @@ export default function CardProject({ title, desc, img, date }: typeCard) {
         <figure className="mb-2 relative group">
           <Image
             alt="example"
-            src={img}
+            src={"." + img}
             width={100}
             height={100}
             layout="responsive"
@@ -50,7 +50,7 @@ export default function CardProject({ title, desc, img, date }: typeCard) {
         >
           <Image
             alt="example"
-            src={img}
+            src={"." + img}
             width={900}
             height={600}
             className="aspect-[3/2] w-[50%] h-[70vh] bg-slate-900 object-cover rounded-sm"
