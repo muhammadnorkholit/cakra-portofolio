@@ -9,11 +9,11 @@ export const fetchCache = "auto";
 export const runtime = "nodejs";
 export const preferredRegion = "auto";
 export const maxDuration = 5;
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 export const POST = async (req: any, res: any) => {
   const formData = await req.formData();
