@@ -19,7 +19,7 @@ export default function CardProject({ title, desc, img, date }: typeCard) {
             width={100}
             height={100}
             layout="responsive"
-            className="aspect-[3/2] object-cover rounded-sm"
+            className="aspect-[3/2] bg-slate-900 object-cover rounded-sm"
           />
         </figure>
         <h5 className="text-lg capitalize font-medium">{title}</h5>

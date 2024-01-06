@@ -1,11 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React, { useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar({ name }: { name: string }) {
   const [Show, setShow] = useState(false);
   return (
     <div className="  py-3 px-8 shadow-sm ">
@@ -18,7 +17,7 @@ export default function Navbar() {
         </Button>
         <div className="menu desktop hidden md:block">
           <ul className="flex items-center gap-4">
-            <NavItem title="Muhammad Nor Kholit" link="/" />
+            <NavItem title={name} link="/" />
           </ul>
         </div>
         <aside
@@ -37,7 +36,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="border-l-4 bg-slate-100 block py-2 border-black px-5"
-                href={"/dashboard"}
+                href={"/projects"}
               >
                 <i className="mr-3 fa-solid fa-briefcase"></i>My Project
               </Link>
@@ -45,17 +44,17 @@ export default function Navbar() {
             <li>
               <Link
                 className="px-5 block border-l-4 border-transparent"
-                href={"/pengaturan"}
+                href={"/setting"}
               >
                 {" "}
                 <i className="mr-3  fa-solid fa-gear"></i>
-                Pengaturan
+                Setting
               </Link>
             </li>
             <li>
               <Link
                 className="px-5 border-l-4 border-transparent block"
-                href={"/pengaturan"}
+                href={"/logout"}
               >
                 <i className=" mr-2 fa-solid fa-arrow-right-from-bracket"></i>{" "}
                 Logout

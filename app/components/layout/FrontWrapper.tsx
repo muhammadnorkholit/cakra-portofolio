@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../navbar/front/Navbar";
 import Footer from "../Footer";
+import NavbarContainer from "../navbar/front/NavbarContainer";
 
 export default function FrontWrapper({
   children,
@@ -10,7 +10,7 @@ export default function FrontWrapper({
   return (
     <main className=" flex flex-col justify-between">
       <div className="">
-        <Navbar />
+        <NavbarContainer />
         {children}
       </div>
       <Footer />

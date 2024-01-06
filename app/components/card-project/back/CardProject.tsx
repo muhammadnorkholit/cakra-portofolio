@@ -8,7 +8,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Delete from "@/app/dashboard/Delete";
+import Delete from "@/app/projects/Delete";
+import Link from "next/link";
 type typeCard = {
   title?: string;
   desc?: string;
@@ -22,7 +23,10 @@ export default function CardProject({ title, desc, date, id }: typeCard) {
         <h1 className="font-bold">{title}</h1>
         <div className="">
           <div className="">
-            <i className="fa fa-pencil mr-2"></i>
+            <Link href={"/projects/" + id}>
+              {" "}
+              <i className="fa fa-pencil mr-2"></i>
+            </Link>
             <Delete id={id}>
               <i className="fa text-rose-500 fa-trash mr-2"></i>
             </Delete>

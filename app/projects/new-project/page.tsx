@@ -1,13 +1,11 @@
 import React from "react";
-
+import Form from "./Form";
 import { Metadata } from "next";
-import Form from "./form";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Cakra Portofolio - Create Project",
   description: "Website portofolio by cakra",
 };
-
-export default function Login() {
+export default function NewProject() {
   return <Form />;
 }

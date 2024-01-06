@@ -1,61 +1,86 @@
 "use client";
 import React, { SyntheticEvent, useState } from "react";
-import BackWrapper from "../components/layout/backWrapper";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import Loader from "../components/Loader";
+import Loader from "../../components/Loader";
 import { axios } from "@/helpers/Axios";
 import Image from "next/image";
-const moment = require("moment");
+import Link from "next/link";
 require("moment/locale/id");
-export default function NewProject() {
-  const [Preview, setPreview] = useState("");
+
+export default function Form({ data }: { data: any }) {
+  const [Preview, setPreview] = useState(data.img);
+  const [CurrImg] = useState(data.img);
   const [Loading, setLoading] = useState(false);
-  const [BtnText, setBtnText] = useState("Save Project");
-  const [ImagePrev, setImagePrev] = useState("");
+  const [BtnText, setBtnText] = useState("Update Project");
+  const [ImageFile, setImageFile] = useState();
+  const [Project] = useState(data);
   const { toast } = useToast();
+  const { id } = useParams();
 
   let route = useRouter();
 
   const handleSubmit = async (e: SyntheticEvent) => {
     try {
-      const currentDate = moment();
-      const formattedDate = currentDate
-        .locale("id")
-        .format("dddd, D MMMM YYYY");
-
       e.preventDefault();
       setLoading(true);
       setBtnText("Saving");
       const target: any = e.target;
       const title = target?.title.value;
       const desc = target?.desc.value;
-      const img = ImagePrev;
+      const img = ImageFile;
 
-      await axios.post("/projects", {
+      let fileName;
+      if (img) {
+        const formData = new FormData();
+        formData.append("file", img);
+        formData.append("imgName", CurrImg);
+        let imageName = await fetch(`/api/upload`, {
+          method: "POST",
+          body: formData,
+        });
+        fileName = await imageName.json();
+      } else {
+        fileName = CurrImg;
+      }
+
+      await axios.put("/projects/" + id, {
         title,
         desc,
-        img,
-        date: formattedDate,
+        img: fileName,
+        date: data.date,
       });
       setTimeout(() => {
         setLoading(false);
-        route.push("/dashboard");
+        route.push("/projects");
+        route.refresh();
         toast({
           className: "bg-emerald-500 text-white  ",
           title: "Notification ",
-          description: "Successfully add new project",
+          description: "Successfully update  project",
         });
       }, 4000);
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        className: "bg-rose-500 text-white  ",
+        title: "Notification ",
+        description: "Failed update  project",
+      });
+    }
   };
-  return (
-    <BackWrapper>
-      <h1 className="text-xl   font-bold mb-5">Add New Project</h1>
 
+  return (
+    <>
+      <h1 className="text-xl   font-bold mb-5">Edit Project</h1>
+      <Link href={"/projects"}>
+        <Button variant={"outline"} className="group mb-6">
+          <i className="fa fa-arrow-left transition-all duration-300 mr-2 group-hover:-translate-x-1"></i>
+          Back
+        </Button>
+      </Link>
       <form
         action=""
         method="post"
@@ -80,6 +105,7 @@ export default function NewProject() {
                 </h3>
                 {Preview && (
                   <Image
+                    loading="lazy"
                     objectFit="cover"
                     src={Preview}
                     alt="preview image"
@@ -97,8 +123,8 @@ export default function NewProject() {
                     const reader: any = new FileReader();
                     reader.onload = () => {
                       setPreview(reader.result);
-                      setImagePrev(reader.result);
                     };
+                    setImageFile(data);
                     reader.readAsDataURL(data);
                   }
                 }}
@@ -112,6 +138,7 @@ export default function NewProject() {
                 Title
               </label>
               <Input
+                defaultValue={Project?.title}
                 name="title"
                 type="text"
                 placeholder="Enter project title"
@@ -123,6 +150,7 @@ export default function NewProject() {
                 Description
               </label>
               <Textarea
+                defaultValue={Project?.desc}
                 name="desc"
                 placeholder="Enter project description"
                 className="focus-visible:ring-0"
@@ -134,6 +162,6 @@ export default function NewProject() {
           </div>
         </div>
       </form>
-    </BackWrapper>
+    </>
   );
 }

@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import CardProject from "./components/card-project/front/CardProject";
 import FrontWrapper from "./components/layout/FrontWrapper";
 import { axios } from "@/helpers/Axios";
+import { NextRequest } from "next/server";
+import Axios from "axios";
 
 export const metadata: Metadata = {
   title: "Cakra Portofolio",
@@ -10,25 +12,27 @@ export const metadata: Metadata = {
 };
 
 const fetchData = async () => {
-  let data = await axios("/projects");
-  return data?.data || [];
+  let data = await axios("/projects?_sort=id&_order=desc");
+  let data2 = await axios("/settings");
+  let projects = data?.data || {};
+  let setting = data2?.data[0] || {};
+  return { projects, setting };
 };
 
-export default async function Home() {
-  let projects = await fetchData();
+export default async function Home({ req }: { req: any }) {
+  let { projects, setting } = await fetchData();
+  let year = new Date().getFullYear();
+
   return (
     <FrontWrapper>
       <section className="flex container justify-center flex-col items-center min-h-[80vh]">
         <h1 className="text-7xl font-bold mb-4 year-text absolute md:block hidden left-16 top-[50%] translate-y-[-50%]">
-          2023
+          {year}
         </h1>
         <h1 className="text-5xl font-bold mb-4 hover:scale-[1.03] transition-all duration-300">
-          Cakra Portofolio
+          {setting.title}
         </h1>
-        <p className="text-sm mb-3 text-center">
-          Website ini dibuat menggunakan next js dan node js sebagai framework
-          untuk membantu pengembangan website
-        </p>
+        <p className="text-sm mb-3 text-center">{setting.desc}</p>
         <div className="flex gap-2">
           <Button variant={"default"}>Explore Project</Button>
           <a href="https://github.com/muhammadnorkholit">
