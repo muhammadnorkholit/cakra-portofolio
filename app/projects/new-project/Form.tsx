@@ -37,7 +37,7 @@ export default function Form() {
       const img = ImageFile;
       const formData = new FormData();
       formData.append("file", img);
-            console.log(process.env.API_LOCAL);
+      
 
       let imageName = await fetch(`${process.env.API_LOCAL}/upload`, {
         method: "POST",
@@ -65,7 +65,7 @@ export default function Form() {
       toast({
         className: "bg-rose-500 text-white  ",
         title: "Notification ",
-        description: "Failed update  project"+error,
+        description: "Failed update  project"+process.env.API_LOCAL,
       });
     }
   };
