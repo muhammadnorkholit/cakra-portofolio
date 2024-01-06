@@ -38,7 +38,7 @@ export default function Form({ data }: { data: any }) {
         const formData = new FormData();
         formData.append("file", img);
         formData.append("imgName", CurrImg);
-        let imageName = await fetch(`/api/upload`, {
+        let imageName = await fetch(`https://cakra-portofolio-one.vercel.app/api/upload`, {
           method: "POST",
           body: formData,
         });
