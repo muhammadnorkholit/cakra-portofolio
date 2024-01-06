@@ -1,6 +1,5 @@
 "use client";
 import React, { SyntheticEvent, useState } from "react";
-import BackWrapper from "../../components/layout/backWrapper";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -69,7 +68,7 @@ export default function Form() {
     }
   };
   return (
-    <BackWrapper>
+    <>
       <h1 className="text-xl   font-bold mb-5">Create Project</h1>
       <Link href={"/projects"}>
         <Button variant={"outline"} className="group mb-6">
@@ -155,6 +154,6 @@ export default function Form() {
           </div>
         </div>
       </form>
-    </BackWrapper>
+    </>
   );
 }
