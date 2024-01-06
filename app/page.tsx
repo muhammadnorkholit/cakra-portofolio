@@ -27,7 +27,7 @@ export default async function Home() {
         <h1 className="text-7xl font-bold mb-4 year-text absolute md:block hidden left-16 top-[50%] translate-y-[-50%]">
           {year}
         </h1>
-        <h1 className="text-5xl font-bold mb-4 hover:scale-[1.03] transition-all duration-300">
+        <h1 className="text-5xl text-center font-bold mb-4 hover:scale-[1.03] transition-all duration-300">
           {setting.title}
         </h1>
         <p className="text-sm mb-3 text-center">{setting.desc}</p>
