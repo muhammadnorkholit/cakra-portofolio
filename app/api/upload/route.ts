@@ -36,6 +36,6 @@ export const POST = async (req: any, res: any) => {
   } catch (error) {
     console.log(error);
 
-    return NextResponse.json({ done: "error" });
+    return NextResponse.json({ done: "error" ,error});
   }
 };
