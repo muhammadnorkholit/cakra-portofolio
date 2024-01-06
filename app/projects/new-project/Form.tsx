@@ -66,7 +66,7 @@ export default function Form() {
       toast({
         className: "bg-rose-500 text-white  ",
         title: "Notification ",
-        description: "Failed create  project " + error,
+        description: "Failed create  project ",
       });
     }
   };
