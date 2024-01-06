@@ -2,11 +2,18 @@ import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
+export const dynamic = "auto";
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = "auto";
+export const runtime = "nodejs";
+export const preferredRegion = "auto";
+export const maxDuration = 5;
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export const POST = async (req: any, res: any) => {
   const formData = await req.formData();
