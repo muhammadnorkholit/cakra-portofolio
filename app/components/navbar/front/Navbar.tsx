@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
 
-export default function Navbar({ dataAuth }: { dataAuth: string }) {
+export default function Navbar({ dataAuth }: { dataAuth: boolean }) {
   const [Show, setShow] = useState(false);
 
   return (
